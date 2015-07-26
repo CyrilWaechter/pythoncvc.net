@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Outils pythoncvc.net</Name>
+    <Assembly>path\pythoncvc.dll</Assembly>
+    <AddInId>C12476B2-1BA6-4A44-8646-0A6619070956</AddInId>
+    <FullClassName>pythoncvc</FullClassName>
+    <VendorId>REGISTER_YOUR_VENDOR_ID</VendorId>
+	<VendorDescription>Python CVC, pythoncvc.net</VendorDescription>
+	<VisibilityMode>NotVisibleInFamily</VisibilityMode>
+	<LongDescription>
+	Cet addin regroupe les outils développés par pythoncvc.net, plus d'information sur le site.
+	</LongDescription>
+  </AddIn>
+</RevitAddIns>

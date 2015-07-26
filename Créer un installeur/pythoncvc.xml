@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RpsAddin>
+  <RibbonPanel text="PythonCVC.net">
+    <!-- the script is always searched relative to the location of the RpsAddin xml file -->
+    <PushButton text="Renommer la vue" src="Sources\renommer_vues.py"/>
+	<PushButton text="Supprimer système" src="Sources\supprimer_système.py"/>
+    <PushButton text="Rotation axe X" src="Sources\rotation_element.py"/>
+	<PushButton text="Supprimer famille" src="Sources\supprimer_famille.py"/>
+    <PushButton text="Supprimer type" src="Sources\supprimer_type.py"/>
+  </RibbonPanel>
+</RpsAddin>
