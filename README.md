@@ -1,7 +1,5 @@
 # pythoncvc.net
-Dépôt de code du site Python CVC
-
-Python HVAC reposiroty
+Dépôt de code du site [http://pythoncvc.net](http://pythoncvc.net)
 
 #Installation
 Get last version of pythoncvc.net tools [here](https://github.com/Nahouhak/pythoncvc.net/releases/latest)
