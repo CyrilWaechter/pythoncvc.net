@@ -1,0 +1,59 @@
+Microsoft (R) COFF/PE Dumper Version 10.00.40219.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:/CoolProp-windows-DTU-slave/64BIT_SHARED_LIBRARY-windows/build/build/Release/CoolProp.dll
+
+File Type: DLL
+
+  Section contains the following exports for CoolProp.dll
+
+    00000000 characteristics
+    55A5DAE9 time date stamp Wed Jul 15 06:00:41 2015
+        0.00 version
+           1 ordinal base
+          29 number of functions
+          29 number of names
+
+    ordinal hint RVA      name
+
+          1    0 000F55D0 AbstractState_factory
+          2    1 000F5830 AbstractState_free
+          3    2 000F4910 AbstractState_keyed_output
+          4    3 000F4F90 AbstractState_set_fractions
+          5    4 000F4860 AbstractState_update
+          6    5 000F2910 F2K
+          7    6 000F3FF0 HAProps
+          8    7 000F3DC0 HAPropsSI
+          9    8 000F28F0 K2F
+         10    9 000F3650 PhaseSI
+         11    A 000F46E0 Props
+         12    B 000F4F40 Props1
+         13    C 000F33D0 Props1SI
+         14    D 000F4EF0 PropsS
+         15    E 000F3480 PropsSI
+         16    F 000F2930 get_debug_level
+         17   10 000F3C60 get_fluid_param_string
+         18   11 000F3990 get_global_param_string
+         19   12 000F3900 get_input_pair_index
+         20   13 000F3870 get_param_index
+         21   14 000F3AA0 get_parameter_information_string
+         22   15 000F41D0 haprops_
+         23   16 000F3FA0 hapropssi_
+         24   17 000F3830 propssi_
+         25   18 000F28B0 redirect_stdout
+         26   19 000F3210 saturation_ancillary
+         27   1A 000F2940 set_debug_level
+         28   1B 000F3120 set_reference_stateD
+         29   1C 000F3010 set_reference_stateS
+
+  Summary
+
+       17000 .data
+        C000 .pdata
+      174000 .rdata
+        4000 .reloc
+        1000 .rsrc
+      127000 .text
+        7000 data
+        2000 text
