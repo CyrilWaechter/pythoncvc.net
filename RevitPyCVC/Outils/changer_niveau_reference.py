@@ -13,7 +13,6 @@ def pickobject():
     __window__.Hide()
     picked = uidoc.Selection.PickObject(ObjectType.Element, "Sélectionnez la référence")
     __window__.Show()
-    __window__.Topmost = True
     return picked
 
 #Retrieve needed information from reference object
