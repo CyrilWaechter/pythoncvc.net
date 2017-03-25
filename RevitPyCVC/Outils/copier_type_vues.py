@@ -33,7 +33,6 @@ try:
 	cp_opts = CopyPasteOptions()
 	ElementTransformUtils.CopyElements(doc, ids, autreDoc, Transform.Identity, cp_opts)
 
-	t.Commit()
 except:
     # print a stack trace and error messages for debugging
     import traceback
@@ -41,4 +40,4 @@ except:
     t.RollBack()
 else:
     # no errors, so just close the window
-    __window__.Close()
+	t.Commit()
