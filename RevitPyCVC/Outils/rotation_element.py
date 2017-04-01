@@ -2,15 +2,13 @@
 from Autodesk.Revit.DB import *
 from Autodesk.Revit.DB.Architecture import *
 from Autodesk.Revit.DB.Analysis import *
+from Autodesk.Revit.UI import TaskDialog
+from Autodesk.Revit.UI import UIApplication
+from math import pi
 
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 getselection = uidoc.Selection.GetElementIds
-
-from Autodesk.Revit.UI import TaskDialog
-from Autodesk.Revit.UI import UIApplication
-
-from math import pi
 
 def quit():
    __window__.Close()
