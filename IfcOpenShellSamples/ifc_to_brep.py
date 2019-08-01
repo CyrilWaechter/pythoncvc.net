@@ -18,15 +18,14 @@ def read_geom(ifc_entity, doc, settings):
     # Create FreeCAD shape from Open Cascade BREP
     fc_shape = Part.Shape()
     fc_shape.importBrepFromString(occ_shape)
-    
+
     # Ifc lenght internal unit : meter. FreeCAD internal unit : mm.
-    scale_factor = 1000
-    matrix = FreeCAD.Matrix()
-    matrix.scale(scale_factor, scale_factor, scale_factor)
+    fc_shape.scale(1000)
     
     # Add geometry to FreeCAD scenegraph (Coin)
     fc_part = doc.addObject("Part::Feature", "IfcPart")
-    fc_part.Shape = fc_shape.transformGeometry(matrix)
+    fc_part.Shape = fc_shape
+    
     return fc_part
     
 
