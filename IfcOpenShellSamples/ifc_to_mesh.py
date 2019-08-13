@@ -1,3 +1,4 @@
+# coding: utf8
 import ifcopenshell
 from ifcopenshell import geom
 import FreeCAD
