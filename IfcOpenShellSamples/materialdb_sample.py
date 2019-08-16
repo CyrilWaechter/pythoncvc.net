@@ -17,7 +17,7 @@ def create_ifc_axis2placement(ifc_file, point=ORIGIN, dir_z=DIR_Z, dir_x=DIR_X):
     return ifc_file.createIfcAxis2Placement3D(point, dir_z, dir_x)
 
 
-def create_ifc_localplacement(ifc_file, ifcaxis2placement, relative_to=None):
+def create_ifclocalplacement(ifc_file, ifcaxis2placement, relative_to=None):
     return ifc_file.createIfcLocalPlacement(relative_to, ifcaxis2placement)
 
 
@@ -128,15 +128,95 @@ material_attributes = {
 if __name__ == "__main__":
     # Obtain references to instances defined in template
     file_name = "materialdb_sample.ifc"
-    ifc_file = ifcopenshell.template.create(file_name, schema_identifier="IFC4")
+    ifc_file = ifcopenshell.template.create(file_name, schema_identifier="IFC2x3")
     owner_history = ifc_file.by_type("IfcOwnerHistory")[0]
     project = ifc_file.by_type("IfcProject")[0]
     context = ifc_file.by_type("IfcGeometricRepresentationContext")[0]
 
+    # IFC hierarchy creation
+    site_ifcaxis2placement = create_ifc_axis2placement(ifc_file)
+    site_placement = create_ifclocalplacement(ifc_file, site_ifcaxis2placement)
+    site = ifc_file.createIfcSite(
+        ifcopenshell.guid.new(),
+        owner_history,
+        "Site",
+        None,
+        None,
+        site_placement,
+        None,
+        None,
+        "ELEMENT",
+        None,
+        None,
+        None,
+        None,
+        None,
+    )
+
+    building_ifcaxis2placement = create_ifc_axis2placement(ifc_file)
+    building_placement = create_ifclocalplacement(
+        ifc_file, building_ifcaxis2placement, relative_to=site_placement
+    )
+    building = ifc_file.createIfcBuilding(
+        ifcopenshell.guid.new(),
+        owner_history,
+        "Building",
+        None,
+        None,
+        building_placement,
+        None,
+        None,
+        "ELEMENT",
+        None,
+        None,
+        None,
+    )
+
+    storey_ifcaxis2placement = create_ifc_axis2placement(ifc_file)
+    storey_placement = create_ifclocalplacement(
+        ifc_file, storey_ifcaxis2placement, relative_to=building_placement
+    )
+    elevation = 0.0
+    building_storey = ifc_file.createIfcBuildingStorey(
+        ifcopenshell.guid.new(),
+        owner_history,
+        "Storey",
+        None,
+        None,
+        storey_placement,
+        None,
+        None,
+        "ELEMENT",
+        elevation,
+    )
+
+    container_storey = ifc_file.createIfcRelAggregates(
+        ifcopenshell.guid.new(),
+        owner_history,
+        "Building Container",
+        None,
+        building,
+        [building_storey],
+    )
+    container_site = ifc_file.createIfcRelAggregates(
+        ifcopenshell.guid.new(), owner_history, "Site Container", None, site, [building]
+    )
+    container_project = ifc_file.createIfcRelAggregates(
+        ifcopenshell.guid.new(),
+        owner_history,
+        "Project Container",
+        None,
+        project,
+        [site],
+    )
+
     # Create wall
     wall_uuid = ifcopenshell.guid.new()
     wall_relative_placement = create_ifc_axis2placement(ifc_file)
-    wall_placement = create_ifc_localplacement(ifc_file, wall_relative_placement)
+    wall_placement = create_ifclocalplacement(
+        ifc_file, wall_relative_placement, relative_to=storey_placement
+    )
+
     polyline = create_ifc_polyline(ifc_file, [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0)])
     axis_representation = ifc_file.createIfcShapeRepresentation(
         context, "Axis", "Curve2D", [polyline]
@@ -210,6 +290,16 @@ if __name__ == "__main__":
         owner_history,
         RelatedObjects=[wall],
         RelatingMaterial=material_layer_set_usage,
+    )
+
+    # Relate the window and wall to the building storey
+    ifc_file.createIfcRelContainedInSpatialStructure(
+        ifcopenshell.guid.new(),
+        owner_history,
+        "Building Storey Container",
+        None,
+        [wall],
+        building_storey,
     )
 
     ifc_file.write(file_name)
